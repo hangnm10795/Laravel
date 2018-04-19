@@ -19,9 +19,9 @@
           <div class="sidebar-module">
             <h4>Elsewhere</h4>
             <ol class="list-unstyled">
-              <li><a href="#">GitHub</a></li>
-              <li><a href="#">Twitter</a></li>
-              <li><a href="#">Facebook</a></li>
+             <a href="#"><i class="fab fa-github fa-2x"></i></a>
+             <a href="#"><i class="fab fa-twitter fa-2x"></i></a>
+             <a href="#"><i class="fab fa-facebook-square fa-2x"></i></a>
             </ol>
           </div>
            </div>
