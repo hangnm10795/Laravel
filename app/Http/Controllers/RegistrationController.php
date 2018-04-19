@@ -10,7 +10,7 @@ class RegistrationController extends Controller
     {
     	return view('registration.create');
     }
-
+    
     public function store(RegistrationForm $form)
     {
         $form->persist();
