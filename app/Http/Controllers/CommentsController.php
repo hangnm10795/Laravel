@@ -9,9 +9,13 @@ class CommentsController extends Controller
 {
     public function store(Blog $blog)
     {
-    	$this->validate(request(), ['body' => 'required|min:2']);
-    	$blog->addComment(request('body'));
-    	
+    	Comment::create([
+    		'body' => request('body'),
+    		'blog_id' => $blog->id,
+    		'user_id' => $blog->user_id,
+    		]);
+    	// $this->validate(request(), ['body' => 'required|min:2']);
+    	// $blog->addComment(request('body'));
     	return back();
     }
 }
