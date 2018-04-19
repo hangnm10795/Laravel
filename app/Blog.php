@@ -8,7 +8,7 @@ class Blog extends Model
 {
 	public function comments()
 	{
-		return $this->hasMany(Comment::class);
+		return $this->hasMany(Comment::class); //Comment::class equivalent to App\Comment
 	}
 
 	public function user()  // $post->user //$comment->post->user
