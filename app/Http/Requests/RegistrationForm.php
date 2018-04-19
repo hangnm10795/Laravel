@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\User;
-use App\Mail\Welcome;
+// use App\Mail\Welcome;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -44,6 +44,6 @@ class RegistrationForm extends FormRequest
         
         auth()->login($user);
 
-        Mail::to($user)->send(new Welcome($user));
+        // Mail::to($user)->send(new Welcome($user));
     }
 }
