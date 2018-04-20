@@ -4,26 +4,26 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-8 blog-main">
-			<h1>Publish a Post</h1>
+			<h1>Edit the post</h1>
 			<hr>
-			<form method="POST" action="/blog">
-
+			<form method="POST" action="{{action('BlogController@update', $id)}}">
 				{{ csrf_field() }}
 
 				<div class="form-group">
+					<input type="hidden" value="{{csrf_token()}}" name="_token" />
 					<label for="title">Title</label>
-					<input type="text" class="form-control" id="title" name="title">
+					<input type="text" class="form-control" id="title" name="title" value="{{$blog->title}}">
 				</div>
 
 				<div class="form-group">
 					<label for="body">Body</label>
-					<textarea id="body" name="body" class="form-control"></textarea>
+					<textarea id="body" name="body" class="form-control">{{$blog->body}}</textarea>
 				</div>
 
 				<div class="form-group">
-					<button type="submit" class="btn btn-primary">Publish</button>
+					<button type="submit" class="btn btn-primary">Update</button>
 				</div>
-				<a href="/"><i class="fas fa-angle-double-left"></i></a>
+				
 				@include('layouts.errors')
 
 			</form>

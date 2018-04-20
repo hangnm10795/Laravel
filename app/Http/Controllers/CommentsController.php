@@ -18,5 +18,13 @@ class CommentsController extends Controller
     	// $blog->addComment(request('body'));
     	return back();
     }
+
+    // public function destroy($id)
+    // {
+    //     $blog = Blog::find($id);
+    //     $blog->delete();
+
+    //     return redirect('/')->with('success', 'Post has been deleted!!');
+    // }
 }
 

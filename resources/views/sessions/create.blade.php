@@ -20,7 +20,7 @@
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">Sign In</button>
 			</div>
-
+			<a href="/"><i class="fas fa-angle-double-left"></i></a>
 			@include ('layouts.errors')
 		</form>
 	</div>

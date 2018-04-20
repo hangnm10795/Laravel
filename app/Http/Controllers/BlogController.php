@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Blog;
 use App\Repositories\Blogs;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
@@ -16,12 +17,11 @@ class BlogController extends Controller
 
     public function index()
     {   
-        // $blog = $blogs->all(); public function index(Blogs $blogs)
         $blog = Blog::latest()
-            ->filter(request(['month', 'year']))
-            ->get();
+        ->filter(request(['month', 'year']))
+        ->get();
 
-    	return view('blog.index', compact('blog')); 
+        return view('blog.index', compact('blog')); 
     }
 
     public function show(Blog $blog)
@@ -51,5 +51,42 @@ class BlogController extends Controller
 
         return redirect('/');
         // return redirect(route('index'));
+    }
+
+    public function destroy($id)
+    {
+        $blog = Blog::find($id);
+        $blog->delete();
+
+        session()->flash(
+            'message', 'Post has been deleted!!'
+        );
+
+        return redirect('/');
+    }
+
+    public function edit($id)
+    {
+        $blog = Blog::where('id', $id)
+                    ->first();
+
+        return view('blog.edit', compact('blog', 'id'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $blog = new Blog();
+        $data = $this->validate($request, [
+            'title'=>'required',
+            'body'=> 'required'
+        ]);
+        $data['id'] = $id;
+        $blog->updateBlog($data);
+
+        session()->flash(
+            'message', 'Post has been updated!!'
+        );
+
+        return redirect('/');
     }
 }

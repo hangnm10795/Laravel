@@ -20,6 +20,12 @@ Route::get('/login', 'SessionsController@create');
 Route::post('/login', 'SessionsController@store');
 Route::get('/logout', 'SessionsController@destroy');
 
+Route::get('/edit/blog/{blog}','BlogController@edit');
+Route::post('/edit/blog/{blog}','BlogController@update');
+
+Route::delete('/delete/blog/{blog}','BlogController@destroy');
+
+
 
 
 

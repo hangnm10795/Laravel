@@ -3,9 +3,16 @@
 namespace App;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Blog extends Model
 {
+	use SoftDeletes;
+
+	protected $dates = ['deleted_at'];
+	protected $fillable = ['title', 'body'];
+	
 	public function comments()
 	{
 		return $this->hasMany(Comment::class); //Comment::class equivalent to App\Comment
@@ -19,6 +26,16 @@ class Blog extends Model
 	public function addComment($body)
 	{
 		$this->comments()->create(compact('body'));
+	}
+
+	public function updateBlog($data)
+	{
+		$blog = $this->find($data['id']);
+		$blog->user_id = auth()->user()->id;
+		$blog->title = $data['title'];
+		$blog->title = $data['title'];
+		$blog->save();
+		return 1;
 	}
 
     public function scopeFilter($query, $filters)
@@ -45,4 +62,6 @@ class Blog extends Model
     {
     	return $this->belongsToMany(Tag::class);
     }
+
+
 }

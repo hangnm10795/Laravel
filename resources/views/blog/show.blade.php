@@ -2,6 +2,19 @@
 
 @section('content')
 <div class="col-sm-8 blog-main">
+	@can('delete_post')
+	<form action="{{action('BlogController@destroy', $blog->id)}}" method="post" class="float-right">
+		{{ csrf_field() }}
+		{{ method_field('DELETE') }}
+		<div class="form-group">
+			<button type="submit" class="btn btn-danger btn-sm "><i class="fas fa-trash-alt"></i></button>
+		</div>
+	</form>
+	@endcan
+	
+	@can('edit_post')
+		<a href="{{action('BlogController@edit',$blog->id)}}" class="btn btn-info btn-sm float-right"><i class="far fa-edit"></i></a>
+	@endcan
 	<h1>{{ $blog->title }}</h1>
 	{{ $blog->body }}
 
@@ -12,10 +25,9 @@
 			@foreach ($blog->comments as $comment)
 			<li class="list-group-item">
 				<strong>
-					{{ $comment->created_at->diffForHumans() }} : &nbsp;
+					{{ $comment->created_at->diffForHumans() }} by {{ $blog->user->name }} : &nbsp;
 				</strong>
 				{{ $comment->body }}
-				<a href="#" class="float-right"><i class="fas fa-times"></i></a>
 			</li>
 			@endforeach
 		</ul>
@@ -34,15 +46,7 @@
 				@endif
 				<div class="form-group">
 					@if (Auth::check())
-						<button type="submit" class="btn btn-primary">Add Comment</button>
-
-						@can('edit_post')
-						<button type="submit" class="btn btn-info">Edit Post</button>
-						@endcan
-						
-						@can('delete_post')
-						<button type="submit" class="btn btn-danger">Delete Post</button>
-						@endcan
+					<button type="submit" class="btn btn-primary">Add Comment</button>
 					@endif
 				</div>
 			</form>
